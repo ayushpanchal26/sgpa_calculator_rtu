@@ -1,0 +1,462 @@
+:root {
+    --rich-black: #0d1b2aff; /* Rich Black */
+    --dark-orange: #FF8C00ff; /* Dark Orange */
+    --orange: #FFA500ff; /* Orange */
+    --light-orange: #FFD700ff; /* Light Orange */
+    --platinum: #e0e1ddff; /* Platinum */
+}
+
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--platinum);
+    /* Platinum */
+    color: var(--rich-black);
+    /* Rich Black */
+}
+
+/* Header styling */
+header {
+    background-color: var(--dark-orange);
+    /* Dark Orange */
+    width: "100%";
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main container styling */
+.container {
+    background-color: #fff;
+    max-width: 600px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.semester-selection {
+    position: relative;
+    /* Ensure proper positioning */
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.semester-selection label {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--rich-black);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.semester-selection select {
+    width: 100%;
+    padding: 12px 16px;
+    /* Increase padding for better touch interaction */
+    font-size: 16px;
+    border: 2px solid var(--orange);
+    /* Add a border */
+    border-radius: 8px;
+    appearance: none;
+    background-color: var(--platinum);
+    color: var(--rich-black);
+    outline: none;
+    cursor: pointer;
+}
+
+/* Custom select arrow */
+.semester-selection select::after {
+    content: "\25BC";
+    /* Downward arrow character */
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* Ensure click-through */
+}
+
+/* Hover and focus styles for select element */
+.semester-selection select:hover,
+.semester-selection select:focus {
+    border-color: var(--dark-orange);
+    /* Change border color on hover/focus */
+}
+
+.total-credits {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--rich-black);
+}
+
+/* Subject inputs styling */
+.subject-inputs {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.subject-inputs label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--light-orange);
+}
+
+.subject-inputs select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    /* Add transition for smooth effect */
+}
+
+.input-container:hover label,
+.input-container:focus label {
+    color: var(--dark-orange);
+    /* Change label color on hover */
+}
+
+/* Hover effect for subject inputs */
+.input-container select:hover,
+.input-container select:focus {
+    background-color: #f0f0f0;
+    /* Lighter background color on hover */
+}
+
+/* Button styling */
+.calculate-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: var(--dark-orange);
+    /* Dark Orange */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calculate-button:hover {
+    background-color: var(--orange);
+    /* Orange */
+}
+
+/* Result styling */
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--dark-orange);
+    /* Dark Orange */
+    font-weight: bold;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--platinum);
+    background-color: var(--dark-orange);
+    /* Use your preferred color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 999;
+    /* Ensure it's above other content */
+    transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .floating-button {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}
+
+.floating-button:hover {
+    background-color: var(--orange);
+    /* Use your preferred hover color */
+}
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup-content {
+    background-color: #fff;
+    width: 80%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--rich-black);
+}
+
+.close-popup:hover {
+    color: #ff0000;
+}
+
+.popup-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--rich-black);
+}
+
+.popup-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--light-orange);
+}
+
+.popup-content input,
+.popup-content select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid var(--light-orange);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    color: var(--rich-black);
+}
+
+.popup-content select:hover,
+.popup-content select:focus {
+    background-color: #f0f0f0;
+    /* Lighter background color on hover */
+}
+
+.popup-content button {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: var(--dark-orange);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-content button:hover {
+    background-color: var(--orange);
+}
+
+.popup-content #cgpaResult {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--dark-orange);
+    font-weight: bold;
+}
+/* Footer styling */
+footer {
+    background-color: var(--dark-orange);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  :root {
+    --orange: #ff6f00;
+    --dark-orange: #e65100;
+    --black: #000000;
+  }
+  
+  body {
+    background-color: var(--black);
+    color: var(--orange);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav {
+    background-color: var(--dark-orange);
+    padding: 10px;
+  }
+  
+  header {
+    text-align: center;
+  }
+  
+  header .logo h1 {
+    margin: 0;
+    color: #fff;
+  }
+  
+  main.content {
+    padding: 20px;
+    padding-bottom: 80px; /* Add padding to avoid overlap with footer */
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .semester-selection {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .total-credits {
+    margin-top: 10px;
+  }
+  
+  .subject-inputs {
+    margin-bottom: 20px;
+  }
+  
+  .calculate-button,
+  #calculateCGPA {
+    background-color: var(--orange);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .calculate-button:hover,
+  #calculateCGPA:hover {
+    background-color: var(--dark-orange);
+  }
+  
+  .result {
+    margin-top: 20px;
+  }
+  
+  .floating-button {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .floating-button:hover {
+    background-color: var(--dark-orange);
+  }
+  
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .close-popup {
+    float: right;
+    cursor: pointer;
+  }
+  
+  .input-container {
+    margin-bottom: 15px;
+  }
+  
+  footer {
+    background-color: var(--dark-orange);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
